@@ -1,8 +1,10 @@
 const scrape    = require('./controllers/scrape'),
-    path        = require('path');
+    path        = require('path'),
+    cors        = require('cors');
 
 module.exports = function(app) {
 
+    app.use(cors())
     /**
      * Post route for the API
      */
@@ -11,7 +13,7 @@ module.exports = function(app) {
     /**
      * Catch all route for all get calls to this server
      */
-    app.get('*', function(req, res, next) {
+    app.all('*', function(req, res, next) {
         var err = new Error();
         err.status = 404;
         next(err);
