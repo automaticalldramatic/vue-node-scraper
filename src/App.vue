@@ -1,3 +1,6 @@
+<style lang="scss">
+@import './sass/main';
+</style>
 <template>
     <transition name="fade-out-left" mode="in-out">
         <div id="app">

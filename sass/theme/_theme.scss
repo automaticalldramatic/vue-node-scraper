@@ -1,0 +1,96 @@
+/**
+ * Theme CSS file .
+ * This file includes all theme related partial files and includes grid base file.
+ *
+ * @author Jaydev Gajera <jaydevonline@gmail.com>
+ * @version 1.0
+ */
+
+@import "../base";
+
+@import "theme-variables" ;
+@import "theme-fonts";
+@import "theme-mixins";
+
+
+ul,
+ol{
+	list-style-type: none;
+}
+
+%padding-xs {
+  padding : 5px;
+}
+
+%padding-s {
+	padding : 10px;
+}
+
+%padding-m {
+	padding : 15px;
+}
+
+%padding-l {
+	padding : 20px;
+}
+
+body {
+	font-family : $font-stack;
+}
+
+
+//--------------------------------
+// Buttons 
+
+.button {
+	display : inline-block;
+	color: $color-white;
+	text-decoration:none;
+	padding:10px 20px;
+	margin: 5px 10px;
+	font-size: 14px;
+	border : none;
+	cursor : pointer;
+	@include border-radius(3px);
+}
+
+.button-primary--small {
+	@include button-bg($bg-btn-primary-small);
+}
+
+.button-primary--large {
+	@include button-bg($bg-btn-primary-large);
+}
+
+.button-secondary {
+	@include button-bg($bg-btn-secondary);
+}
+
+//--------------------------------
+// Hedings
+
+
+h1 { 
+	font-size: 2rem; 
+	margin: .67em 0;
+}
+h2 { 
+	font-size: 1.5rem; 
+	margin: .75em 0;
+}
+h3 { 
+	font-size: 1.17rem; 
+	margin: .83em 0;
+}
+h4 { 
+	font-size: 1.12rem;
+	margin: 1.1em 0;
+}
+h5 { 
+	font-size: .83rem; 
+	margin: 1.5em 0;
+}
+h6 { 
+	font-size: .75rem; 
+	margin: 1.67em 0;
+}

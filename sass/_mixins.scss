@@ -1,0 +1,176 @@
+/**
+ * Grid related mixins. Keeping all 'Flex' related mixins here.
+ *
+ * We are writing everything from scratch cause thats how companies are built
+ *
+ * @author Rizwan Iqbal <mailme@rizwaniqbal.com>
+ */
+
+@mixin phones {
+	@media (max-width: #{$small-width}){
+
+		@content;
+	}
+}
+
+@mixin tabs {
+	@media (min-width: #{$small-width}) and (max-width: #{$large-width}) {
+
+		@content;
+	}	
+}
+
+@mixin desktops {
+	@media (min-width: #{$large-width}) {
+		@content;
+	}
+}
+
+@mixin linear-gradient($fromColor, $toColor) {
+	background-color: $toColor; /* Fallback Color */
+	background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+	background-image:    -moz-linear-gradient(top, $fromColor, $toColor); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, $fromColor, $toColor); /* IE10 */
+	background-image:      -o-linear-gradient(top, $fromColor, $toColor); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, $fromColor, $toColor);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+@mixin roundedArrow($arrowRotate, $tailRotate, $color, $marginTop:'', $marginLeft:'') {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-top: 9px solid transparent;
+	border-right: 9px solid $color;
+	-webkit-transform: rotate($arrowRotate);
+	-moz-transform: rotate($arrowRotate);
+	-ms-transform: rotate($arrowRotate);
+	-o-transform: rotate($arrowRotate);
+	margin-top: #{$marginTop};
+	margin-left: #{$marginLeft};
+	&:after {
+		content: "";
+		position: absolute;
+		border: 0 solid transparent;
+		border-top: 3px solid $color;
+		border-radius: 30px 0 0 0;
+		top: -20px;
+		left: -30px;
+		width: 30px;
+		height: 30px;
+		-webkit-transform: rotate($tailRotate);
+		-moz-transform: rotate($tailRotate);
+		-ms-transform: rotate($tailRotate);
+		-o-transform: rotate($tailRotate);
+	}
+}
+
+//----------------------------------------------------------------------
+
+// Flexbox Containers
+//
+// The 'flex' value causes an element to generate a block-level flex
+// container box.
+//
+// The 'inline-flex' value causes an element to generate a inline-level
+// flex container box. 
+//
+// display: flex | inline-flex
+
+@mixin flexbox {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+@mixin inline-flex {
+	display: -webkit-inline-box;
+	display: -webkit-inline-flex;
+	display: -moz-inline-flex;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+
+//----------------------------------------------------------------------
+
+// Flex
+// 
+// This is the shorthand for flex-grow, flex-shrink and flex-basis. 
+// 
+// The second parameter (width) is optional.
+//
+// flex: 0 auto | auto | none | <positive number>>
+
+@mixin flex($value, $width:"") {
+	-webkit-box-flex: $value;
+	-moz-box-flex: $value;
+	width: #{$width}; // Passing our width value here
+	-webkit-flex: $value;
+	-ms-flex: $value;
+	flex: $value;
+}
+
+//----------------------------------------------------------------------
+
+// Flexbox Direction
+//
+// The 'flex-direction' property specifies how flex items are placed in
+// the flex container, by setting the direction of the flex container's
+// main axis. This determines the direction that flex items are laid out in. 
+//
+// Values: row | row-reverse | column | column-reverse
+// Default: row
+
+@mixin flex-direction($value: row) {
+	@if $value == row-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: horizontal;
+	} @else if $value == column {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: vertical;
+	} @else if $value == column-reverse {
+		-webkit-box-direction: reverse;
+		-webkit-box-orient: vertical;
+	} @else {
+		-webkit-box-direction: normal;
+		-webkit-box-orient: horizontal;
+	}
+	-webkit-flex-direction: $value;
+	-moz-flex-direction: $value;
+	-ms-flex-direction: $value;
+	flex-direction: $value;
+}
+
+//----------------------------------------------------------------------
+
+// Flexbox Align Items
+//
+// Flex items can be aligned in the cross axis of the current line of the
+// flex container, similar to 'justify-content' but in the perpendicular
+// direction. 'align-items' sets the default alignment for all of the flex
+// container's items, including anonymous flex items. 'align-self' allows
+// this default alignment to be overridden for individual flex items. (For
+// anonymous flex items, 'align-self' always matches the value of 'align-items'
+// on their associated flex container.) 
+//
+// Values: flex-start | flex-end | center | baseline | stretch
+// Default: stretch
+
+@mixin align-items($value: stretch) {
+	@if $value == flex-start {
+		-webkit-box-align: start;
+		-ms-flex-align: start;
+	} @else if $value == flex-end {
+		-webkit-box-align: end;
+		-ms-flex-align: end;
+	} @else {
+		-webkit-box-align: $value;
+		-ms-flex-align: $value;
+	}
+	-webkit-align-items: $value;
+	-moz-align-items: $value;
+	align-items: $value;
+}

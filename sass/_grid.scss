@@ -1,0 +1,120 @@
+/**
+ * Grid Layout
+ *
+ * This a flex grid aimed to take advantage of sovling common
+ * web-design problems with Flex. To understand more about the grid structure,
+ * please refer to this post:
+ * http://philipwalton.github.io/solved-by-flexbox/demos/grids/
+ *
+ * And this repository:
+ * https://github.com/philipwalton/solved-by-flexbox
+ *
+ * @author Rizwan Iqbal <mailme@rizwaniqbal.com>
+ */
+
+.grid {
+	display: flex;
+	flex-wrap: wrap;
+    flex-direction: column;
+	&-cell {
+		flex: 1;
+		&--top { align-self: flex-start; }
+		&--bottom { align-self: flex-end; }
+		&--center { align-self: center; }
+	}
+
+	// Gutters
+	&--gutters {
+		margin: -0.625em 0 0 -0.625em;
+		& > .grid-cell { padding: 0.625em 0 0 0.625em; }
+	}
+
+	// Alignment per row
+	&--top { align-items: flex-start; }
+	&--bottom { align-items: flex-end; }
+	&--center { align-items: center; }
+
+	// Columns
+	&--fit > .grid-cell { flex: 1; }
+
+	&--col1-2 { flex: 0 0 50%; }
+	&--col1-3 { flex: 0 0 33.3333%; }
+	&--col1-4 { flex: 0 0 25%; }
+	&--col1-5 { flex: 0 0 20%; }
+
+	&--col1-3by2 { flex: 0 0 66.6666% }
+	&--col1-4by3 { flex: 0 0 75% }
+
+}
+
+.grid.container {
+	 margin: 0.625em 0.625em 0 0 !important;
+}
+
+
+@include phones {
+	.grid {
+
+		.grid {     // This is required for Opera mini. The grid layout will not be rendered properly without this on Opera mini.
+			display: flex;
+			flex-wrap: wrap;
+
+			.grid-cell {
+				flex: 1;
+				&--top { align-self: flex-start; }
+				&--bottom { align-self: flex-end; }
+				&--center { align-self: center; }
+			}
+		}
+	}
+
+	.grid--full {
+		> .grid-cell {
+			flex: 0 0 100%;
+		}
+
+		.grid--full{
+			>.grid-cell{
+				flex: 0 0 100%;
+			}
+		}
+	}
+
+}
+
+@include tabs {
+
+	.grid {
+
+		.grid {     // This is required for Opera mini. The grid layout will not be rendered properly without this on Opera mini.
+			display: flex;
+			flex-wrap: wrap;
+
+			.grid-cell {
+				flex: 1;
+				&--top { align-self: flex-start; }
+				&--bottom { align-self: flex-end; }
+				&--center { align-self: center; }
+			}
+		}
+	}
+
+	.grid--full {
+		> .grid-cell {
+			flex: 0 0 100%;
+		}
+
+		.grid--full {
+			>.grid-cell {
+				flex: 0 0 100%;
+			}
+		}
+	}
+}
+
+@include desktops {
+	.wrapper {
+		max-width:1440px;
+		margin : 0 auto;
+	}
+}

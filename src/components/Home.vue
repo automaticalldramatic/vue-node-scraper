@@ -1,11 +1,13 @@
 <template>
     <div class="wrapper">
-        <div class="hello">
-            <h1></h1>
-            <form-com></form-com>
-        </div>
-        <div class="result">
-            <scraperesult></scraperesult>
+        <div class="grid container grid--gutters grid--full">
+            <div class="hello">
+                <h1></h1>
+                <form-com></form-com>
+            </div>
+            <div class="result">
+                <scraperesult></scraperesult>
+            </div>
         </div>
     </div>
 </template>

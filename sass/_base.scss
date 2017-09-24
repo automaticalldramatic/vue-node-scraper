@@ -1,0 +1,22 @@
+/**
+ * Base styles 
+ *
+ * This helps us keep all common code in one place. We ca decide
+ * the order in which we include our dependencies. Also, does not 
+ * crowd the main.scss file, keeping it loosely coupled from the 
+ * underlying code.
+ *
+ * @author Rizwan Iqbal <mailme@rizwaniqbal.com>
+ */
+
+@import "variables";
+@import "mixins";
+@import "reset";
+@import "grid";
+
+body {
+	font-size: 16px;
+	line-height: 1;
+}
+
+

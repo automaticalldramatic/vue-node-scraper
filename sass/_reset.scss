@@ -1,0 +1,21 @@
+/**
+ * Style resets 
+ *
+ * Because browsers be bitches.
+ *
+ * @author Rizwan Iqbal <mailme@rizwaniqbal.com>
+ */
+
+html,
+body,
+ul,
+ol {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+}
+
+*, *::after, *::before { box-sizing: border-box; }
