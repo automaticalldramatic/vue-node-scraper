@@ -1,6 +1,6 @@
 // var kuwo = require('../models/kuwo');
 const Scraper   = require('../../lib/scraper'),
-    Helpers     = require('../helpers');
+    Models      = require('../models');
 
 exports.search = function(req, res) {
 
@@ -17,8 +17,8 @@ exports.search = function(req, res) {
             if (err) { throw err; }
 
             // all requests are done
-            console.log('Done! Visited links:');
-            console.log(visited);
+            // console.log('Done! Visited links:');
+            // console.log(visited);
         }
     });
 
@@ -28,9 +28,13 @@ exports.search = function(req, res) {
             throw err;
         }
 
-        var str = Helpers.anchors.get(url, document);
+        let result = Models.scraper(url, document);
 
-        res.send('Following URL\'s were found:<br><hr><br><pre>' + str + '</pre>');
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(result));
+        // console.log(JSON.stringify(result));
+
+        // res.send('Following URL\'s were found:<br><hr><br><pre>' + str + '</pre>');
     };
 
     // scraper.queue('http://www.imdb.com/title/tt1229340/', handleRequest);

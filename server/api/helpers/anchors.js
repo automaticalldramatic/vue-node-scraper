@@ -6,7 +6,7 @@ exports.get = function(url, document) {
     var returnArr = [],
         str="";
 
-    console.log("URL - ", url);
+    // console.log("URL - ", url);
     // console.log(document); // document object
 
     const $ = document.$; // cheerio
@@ -24,7 +24,7 @@ exports.get = function(url, document) {
             skipLink = 1;
         }
         // var href = $node.attr('href');
-        console.log("link found - " + index + " => ", Url.resolve(url, $node.attr('href')));
+        // console.log("link found - " + index + " => ", Url.resolve(url, $node.attr('href')));
         if(skipLink != 1) {
             returnArr.push("URL - " + Url.resolve(url, href));
             // scraper.queue(Url.resolve(url, href), function(err, url, document) { console.log(document.title);});
@@ -37,5 +37,5 @@ exports.get = function(url, document) {
         str += returnArr[i] + '<br>';
     };
 
-    return str;
+    return returnArr;
 }
