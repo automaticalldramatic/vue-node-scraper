@@ -1,41 +1,55 @@
 const Url = require('url');
 
 exports.get = function(url, document) {
-    // request done
-    // var that = this
-    var returnArr = [],
+
+    let returnArr = [],
         str="";
 
-    // console.log("URL - ", url);
-    // console.log(document); // document object
-
     const $ = document.$; // cheerio
+
     $('a').each(function(index, node) {
-        // if (index <= 10) {
-        var skipLink = 0;
-        var href = '';
-        var $node = $(node);
-        if($node.attr('href') == undefined) {
+
+        let returnObj = {},
+            skipLink = 0,
+            href = '',
+            $node = $(node),
+            uri = $node.attr('href');
+
+        returnObj['uri'] = uri;
+        returnObj['internal'] = 0;
+
+        if(uri == undefined) {
+            returnObj['skipped'] = returnObj['broken'] = 1;
             return false;
         }
-        if($node.attr('href').match(/mailto:([^\?]*)/) == null) {
+
+        if(uri.match(/mailto:([^\?]*)/) == null && uri.match(/javascript:([^\?]*)/) == null && uri.match(/tel:([^\?]*)/) == null) {
             href = $node.attr('href').split('#')[0];
         } else {
-            skipLink = 1;
+            skipLink = returnObj['skipped'] = 1;
+            returnObj['internal'] = 1;
         }
-        // var href = $node.attr('href');
-        // console.log("link found - " + index + " => ", Url.resolve(url, $node.attr('href')));
+
+        let parsedUri = Url.parse(uri),
+            parsedUrl = Url.parse(url);
+
         if(skipLink != 1) {
-            returnArr.push("URL - " + Url.resolve(url, href));
+            if (/^(f|ht)tps?:\/\//i.test(uri)) {
+                if(parsedUri.host == parsedUrl.host)
+                    returnObj['internal'] = 1
+                returnObj['url'] = uri;
+            } else {
+                returnObj['url'] = Url.resolve(url, href);
+                returnObj['internal'] = 1
+            }
+
+            // -------------------------------------------------------------------------------------------
+            // We can set a follow URL property to true and recursively check links, like a search engine.
+            // // ----------------------------------------------------------------------------------------
             // scraper.queue(Url.resolve(url, href), function(err, url, document) { console.log(document.title);});
         }
-        // } else {
-            // return false;
-        // }
+        returnArr.push(returnObj);
     });
-    for (let i = returnArr.length - 1; i >= 0; i--) {
-        str += returnArr[i] + '<br>';
-    };
 
     return returnArr;
 }

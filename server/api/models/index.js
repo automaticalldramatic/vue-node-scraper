@@ -6,6 +6,7 @@ exports.scraper = function (url, document) {
         'html'      : Helpers.html.version(document.$),
         'title'     : Helpers.title.get(document.$),
         'headers'   : Helpers.headers.get(document.$),
+        'forms'     : Helpers.forms.login(document.$)
     }
     return dataObj;
 }

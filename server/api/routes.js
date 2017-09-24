@@ -3,6 +3,6 @@ const scrape    = require('./controllers/scrape'),
 
 module.exports = function(app) {
 
-    app.get('/scrape', scrape.search)
+    app.post('/scrape', scrape.search)
 
 }

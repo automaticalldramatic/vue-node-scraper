@@ -1,21 +1,20 @@
 exports.get = function ($) {
-    let returnObj = {};
-    validHeadingTypes = ["h1", "h2", "h3", "h4", "h5", "h6"]
+    let returnObj = {},
+        validHeadingTypes = ["h1", "h2", "h3", "h4", "h5", "h6"]
 
     for (let i = validHeadingTypes.length - 1; i >= 0; i--) {
-        returnObj[validHeadingTypes[i]] = {};
-        if($(validHeadingTypes[i]).length > 0) {
+        let hx = validHeadingTypes[i];
+        returnObj[hx] = {};
+        if($(hx).length > 0) {
             returnObj[validHeadingTypes[i]]["length"] = $(validHeadingTypes[i]).length
-            $(validHeadingTypes[i]).each(function (index, dom) {
-                returnObj[validHeadingTypes[i]][index] = {};
-                returnObj[validHeadingTypes[i]][index]["text"] = $(dom).text();
-                returnObj[validHeadingTypes[i]][index]["html"] = $(dom).html();
+            $(hx).each(function (index, dom) {
+                let hhx = returnObj[hx][index] = {};
+                hhx["text"] = $(dom).text();
+                hhx["html"] = $(dom).html();
             })
         } else {
             returnObj[validHeadingTypes[i]]["length"] = $(validHeadingTypes[i]).length
         }
     };
-
     return returnObj;
-
 }
