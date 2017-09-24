@@ -13,11 +13,6 @@ app.use(bodyParser.json());
 // we pass the app instance to this one.
 routes(app);
 
-app.use(function (error, request, response, next) {
-    console.error(error.stack);
-    response.status(400).send(error.message);
-});
-
 http.createServer(app).listen(port, function() {
     console.log('The magic happens at dragonstone.local:' + port);
 });

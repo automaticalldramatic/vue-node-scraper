@@ -123,6 +123,12 @@ Scraper.prototype = {
                 if (err) {
                     this._log('Error', url);
                     return callback(err, url);
+                } else if (response.statusCode != 200) {
+                    this._log('Response', response.statusCode);
+                    var err = new Error();
+                    err.status = response.statusCode;
+                    err.message = "Server returned HTTP status : " + response.statusCode;
+                    return callback(err, url);
                 } else {
                     document = new Document(url, response);
                     process.nextTick(function () {

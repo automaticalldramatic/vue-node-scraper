@@ -8,9 +8,6 @@ exports.search = function(req, res) {
         request: { // config for 'request' package
             headers: { 'user-agent': 'scout24-scraper' },
         },
-        // If defined 'decodeTo' and not 'decodeFrom' then charset of 'response.body' will be detected automatically
-        decodeTo: 'utf8',
-        decodeFrom: '', // e.g. 'win-1251'
         callback: function (err, visited) {
             // if (err) { throw err; }
 
@@ -23,8 +20,12 @@ exports.search = function(req, res) {
     var handleRequest = (err, url, document) => {
         if (err) {
             console.error(err.stack)
-            res.status(500).json({'status' : 500, 'error' : err})
-            res.end()
+            if(err.status !== '') {
+                res.status(err.status).json({'status' : err.status, 'message' : err.message})
+            } else {
+                res.status(500).json({'status' : 500, 'error' : err})
+                res.end()
+            }
         } else {
             const Models = require('../models')
             let result = Models.scraper(url, document)
