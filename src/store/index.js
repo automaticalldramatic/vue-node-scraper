@@ -13,12 +13,33 @@ export default new Vuex.Store({
             'html': {},
             'title': '',
             'headers': {},
-            'forms': ''
+            'forms': '',
+            'fromParser': false
+        },
+        'error': {
+            'data': {
+                'message': ''
+            },
+            'status': ''
         }
     },
     mutations,
     actions,
     getters: {
-        // we will fill our getters here
+        scrapedObj (state) {
+            return state.scrapedObj
+        },
+        scrapedURL (state) {
+            return state.scrapedObj.url
+        },
+        getError (state) {
+            return state.error
+        },
+        getErrorMsg (state) {
+            return state.error.data.message
+        },
+        getErrorStatus (state) {
+            return state.error.status
+        }
     }
 })

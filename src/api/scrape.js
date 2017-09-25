@@ -11,11 +11,13 @@ Vue.http.headers.common['Content-Type'] = 'application/json'
 
 export default {
     search (key) {
-        console.log(SCRAPE_URL, key)
         return Vue.http.post(SCRAPE_URL, { 'url': key })
             .then(
                 res => res.json(),
-                res => console.error('error: ', res.status, res.statusText)
+                res => {
+                    console.error('error: ', res.status, res.body.data.message)
+                    return res.json()
+                }
             )
     }
 }

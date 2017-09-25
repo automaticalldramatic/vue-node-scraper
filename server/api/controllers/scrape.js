@@ -18,17 +18,19 @@ exports.search = function(req, res) {
     });
 
     var handleRequest = (err, url, document) => {
+        let result = {}
         if (err) {
             console.error(err.stack)
             if(err.status !== '') {
-                res.status(err.status).json({'status' : err.status, 'message' : err.message})
+                res.status(err.status).json({'status' : err.status, 'data' : {'message' : err.message}})
             } else {
-                res.status(500).json({'status' : 500, 'error' : err})
+                res.status(500).json({'status' : 500, 'data' : {'message' : err}})
                 res.end()
             }
         } else {
             const Models = require('../models')
-            let result = Models.scraper(url, document)
+            result['data'] = Models.scraper(url, document)
+            result['status'] = 200
             res.json(result)
         }
     };

@@ -5,9 +5,9 @@
                 <h1></h1>
                 <form-com></form-com>
             </div>
-            <div class="result">
+            <transition name="fade-out-left">
                 <scraperesult></scraperesult>
-            </div>
+            </transition>
         </div>
     </div>
 </template>
@@ -25,11 +25,6 @@ export default {
     data () {
         return {
 
-        }
-    },
-    methods: {
-        checkInputProtocol: () => {
-            // myInput : myInput.indexOf("http") > -1 ? myInput : location.protocol + "//" + myInput
         }
     }
 
@@ -54,5 +49,34 @@ li {
 
 a {
     color: #42b983;
+}
+.fade-in-left-enter,
+.fade-in-left-leave-active {
+    transform: translate3d(100%, 0, 0);
+    box-shadow: none;
+}
+
+.fade-out-left-enter,
+.fade-out-left-leave-active {
+    transform: translate3d(-100%, 0, 0);
+    box-shadow: none;
+}
+
+.fade-in-bottom-enter,
+.fade-in-bottom-leave-active {
+    transform: translate3d(0, 100%, 0);
+    box-shadow: none;
+}
+
+
+.fade-in-left-leave-active,
+.fade-out-left-enter-active,
+.fade-in-bottom-enter-active,
+.fade-in-bottom-leave-active {
+    transition: transform .2s ease;
+}
+.fade-in-left-enter-active,
+.fade-out-left-leave-active {
+    transition: transform .2s ease;
 }
 </style>

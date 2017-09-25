@@ -3,9 +3,6 @@
         <form role="form" @submit="search(formParams.url)">
             <h2>Page Insights</h2>
             <p>Enter a URL to get information about a URL</p>
-            <div class="alert alert-danger" v-if="error">
-                <p>{{ error }}</p>
-            </div>
             <div class="form-group">
                 <label for="inpURL">Website address</label>
                 <input type="url" id="inpURL" placeholder="http://" v-model="formParams.url">
@@ -14,6 +11,10 @@
                 <button type="submit">Submit</button>
             </div>
         </form>
+        <div class="alert alert-danger" v-if="error.data.message != ''">
+            <br><hr><br>
+            <p>{{ error.data.message }}</p>
+        </div>
     </div>
 </template>
 
@@ -25,18 +26,25 @@ export default {
         return {
             formParams: {
                 url: ''
-            },
-            error: ''
+            }
         }
     },
     methods: {
         search (inputURL) {
-            // myInput.indexOf("http") > -1 ? myInput : location.protocol + "//" + myInput
-            // if (!this.key.trim()) return
-
-            // console.log(this.key)
-            this.$store.dispatch('search', inputURL)
+            if (inputURL === '') {
+                return
+            }
+            let URL = inputURL.indexOf('http') > -1 ? inputURL : 'http://' + inputURL
+            this.$store.dispatch('search', URL)
         }
+    },
+    computed: {
+        error () {
+            return this.$store.getters.getError
+        }
+    },
+    watch: {
+        error (newError) {}
     }
 
 }

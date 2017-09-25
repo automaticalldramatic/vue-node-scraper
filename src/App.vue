@@ -2,12 +2,10 @@
 @import './sass/main';
 </style>
 <template>
-    <transition name="fade-out-left" mode="in-out">
-        <div id="app">
-            <img src="./assets/logo.png">
-            <router-view></router-view>
-        </div>
-    </transition>
+    <div id="app">
+        <img src="./assets/logo.png">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
