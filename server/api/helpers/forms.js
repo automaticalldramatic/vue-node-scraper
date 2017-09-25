@@ -1,6 +1,5 @@
-var weight = 0;
-
 exports.login = function ($) {
+    var weight = 0;
     if($('input[type="password"]').length > 0) {
         weight +=1;
     }

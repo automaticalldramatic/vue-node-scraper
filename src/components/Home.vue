@@ -1,13 +1,20 @@
 <template>
-    <div class="wrapper">
-        <div class="grid container grid--gutters grid--full">
-            <div class="hello">
-                <h1></h1>
-                <form-com></form-com>
+    <div class="container">
+        <transition name="fade-out-left">
+            <div class="row" v-if="!scrapedObj.fromParser">
+                <div class="column column-50 column-offset-25">
+                    <!-- <h2>Page Insights</h2> -->
+                    <p>Enter a URL to get information about the website</p>
+                    <form-com></form-com>
+                </div>
             </div>
-            <transition name="fade-out-left">
-                <scraperesult></scraperesult>
-            </transition>
+        </transition>
+        <div class="row">
+            <div class="column">
+                <transition name="fade-in-left">
+                    <scraperesult></scraperesult>
+                </transition>
+            </div>
         </div>
     </div>
 </template>
@@ -26,9 +33,20 @@ export default {
         return {
 
         }
+    },
+    computed: {
+
+        scrapedObj () {
+            return this.$store.getters.scrapedObj
+        }
+
+    },
+    watch: {
+        scrapedObj (newObj) {}
     }
 
 }
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -68,15 +86,17 @@ a {
     box-shadow: none;
 }
 
-
 .fade-in-left-leave-active,
+.fade-in-left-enter-active {
+    transition: transform .6s ease;
+}
 .fade-out-left-enter-active,
 .fade-in-bottom-enter-active,
 .fade-in-bottom-leave-active {
     transition: transform .2s ease;
 }
-.fade-in-left-enter-active,
+
 .fade-out-left-leave-active {
-    transition: transform .2s ease;
+    transition: transform .1s ease;
 }
 </style>

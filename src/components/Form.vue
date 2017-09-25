@@ -1,20 +1,13 @@
 <template>
     <div>
         <form role="form" @submit="search(formParams.url)">
-            <h2>Page Insights</h2>
-            <p>Enter a URL to get information about a URL</p>
-            <div class="form-group">
+            <fieldset>
                 <label for="inpURL">Website address</label>
                 <input type="url" id="inpURL" placeholder="http://" v-model="formParams.url">
-            </div>
-            <div class="form-group">
-                <button type="submit">Submit</button>
-            </div>
+                <small v-if="error.data.message != ''" class="error">{{ error.data.message }}</small>
+                <input class="button-primary" type="submit" value="Send">
+            </fieldset>
         </form>
-        <div class="alert alert-danger" v-if="error.data.message != ''">
-            <br><hr><br>
-            <p>{{ error.data.message }}</p>
-        </div>
     </div>
 </template>
 
@@ -51,5 +44,14 @@ export default {
 </script>
 
 <style scoped>
-
+#inpURL {
+    margin-bottom: 1em 0;
+}
+.error {
+    color: #ff0000;
+}
+.error:after {
+    content: " ";
+    display: block;
+}
 </style>

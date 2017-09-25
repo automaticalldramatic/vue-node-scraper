@@ -9,5 +9,10 @@ export default {
     ERROROBJ (state, data) {
         state.error = data
         state.scrapedObj.fromParser = false
+    },
+
+    reset (state, payload) {
+        state.scrapedObj = {}
+        state.scrapedObj.fromParser = false
     }
 }
