@@ -3,7 +3,6 @@
         <transition name="fade-out-left">
             <div class="row" v-if="!scrapedObj.fromParser">
                 <div class="column column-50 column-offset-25">
-                    <!-- <h2>Page Insights</h2> -->
                     <p>Enter a URL to get information about the website</p>
                     <form-com></form-com>
                 </div>
