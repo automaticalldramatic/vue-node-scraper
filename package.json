@@ -1,5 +1,5 @@
 {
-  "name": "scout24-scraper",
+  "name": "rizwaniqbal-vue-node-scraper",
   "version": "1.0.0",
   "description": "A web scraper built on Vue.js using cheerio and express on a node server for APIs",
   "author": "Rizwan Iqbal <mailme@rizwaniqbal.com>",

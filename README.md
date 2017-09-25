@@ -1,4 +1,4 @@
-# scout24-scraper
+# Vue + Node scraper
 
 > A web scraper built on Vue.js using cheerio and express on a node server for APIs
 
@@ -95,12 +95,27 @@ The app instantiates from `main.js`. We create a `new Vue` instance and load it 
 
 The code for mutators and actions can be found in `store/` - index.js creates a new instance of Vuex store and includes getters (which are used by Vue components to retrieve data) and mutators / actions which are used to update data.
 
+----
+
+### Tests
+
+I have not written extensive test cases, but just for the purpose to demo how unit tests and e2e tests should work.
+
+Tests could be found under `test/`. There are karma unit tests under the `unit/` directory and e2e tests using Nightwatch under the `e2e` directory. Karma can use Phantom or Chrome or another web-driver, please modify the config in karma.conf.js as per your requirement.
+
+Also, Nightwatch right now is using Selenium.
+
+My e2e test, for demo purposes just tests the Home page and see if a text is displayed on the screen for e2e
+My unit test, loads the Home component and uses the $el selector to select a component and verifies if a text exists.
+
+----
 
 ### Further Improvements
 
 * The parser cannot parse javascript enabled pages right now, we could use PhantomJS or another web driver to parse dynamic pages
 * We can have the node app config based and load the config from environment variables.
 * We can scrape much more data and start dumping it in a data store. Which can later be used to run a map-reduce job to retrieve some insights and create a page rank sort of a feature
+* Write extensive test cases covering data returned from API tied in to e2e tests.
 
 ----
 

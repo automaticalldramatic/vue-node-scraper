@@ -6,7 +6,7 @@ exports.search = function(req, res) {
         concurrent: 5,
         logs: true,
         request: { // config for 'request' package
-            headers: { 'user-agent': 'scout24-scraper' },
+            headers: { 'user-agent': 'vue-node-scraper' },
         },
         callback: function (err, visited) {
             // if (err) { throw err; }
